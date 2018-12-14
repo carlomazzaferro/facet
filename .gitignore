@@ -102,3 +102,6 @@ ENV/
 .mypy_cache/
 
 resources/riskanalysis.yaml
+
+
+.idea/
