@@ -7,4 +7,9 @@ setup(
     description='A short description of the project.',
     author='Your name (or your organization/company/team)',
     license='MIT',
+    entry_points={
+        'console_scripts': [
+            'facet=src.cli:cli',
+        ],
+    }
 )

@@ -1,0 +1,20 @@
+{
+  "Refreshing": 0,
+  "Runner": 0,
+  "Baker": 0,
+  "Counter": 0,
+  "Regulator": 0,
+  "Has Python": 0,
+  "Has Whiteboard": 0,
+  "Has Reached Balmers Peak": 0,
+  "DNE": 0,
+  "Type of Activity Id": 0.2,
+  "Type of Movie Id": 0.2,
+  "Type of GPU Id": 0.2,
+  "Type of Laptop Id": 0.5,
+  "Type of Toaster Id": 0.3,
+  "Type of Deck Id": 0.2,
+  "Type of Whale Id": 0.5,
+  "Type of Star Id": 0.3,
+  "Type of Dog Id": 0.4
+}
