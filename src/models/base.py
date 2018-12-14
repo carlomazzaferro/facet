@@ -1,3 +1,7 @@
+"""
+See notebook to get an understanding of how the model parameters were decided
+"""
+
 from sklearn.ensemble import RandomForestClassifier
 
 

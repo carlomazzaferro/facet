@@ -1,3 +1,7 @@
+"""
+Custom data transformers. Wrapped in the scikit-leatn api so that they can be placed inside a pipeline transformer
+"""
+
 import pandas
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.preprocessing import OneHotEncoder

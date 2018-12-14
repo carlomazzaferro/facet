@@ -3,15 +3,14 @@
 """Console script for facet."""
 import os
 
-
 import click
+import hug
+
+from src import prod
 from src.data.make_dataset import create_datasets
 from src.models.predict_model import predict_results
-import hug
-from src.settings import RAW_DATA_PATH, PROCESSED_DATA_PATH
 from src.models.train_model import train_clf
-from src import prod
-
+from src.settings import RAW_DATA_PATH, PROCESSED_DATA_PATH
 
 __author__ = "Carlo Mazzaferro"
 __copyright__ = "Carlo Mazzaferro"
@@ -19,10 +18,10 @@ __copyright__ = "Carlo Mazzaferro"
 
 @click.group()
 def cli():
-    """Racket's CLI. With it, you can perform pretty much all operations you desire
+    """Facet's CLI. With it, you can perform pretty much all operations you desire
         Shown below are all the possible commands you can use.
         Run ::
-            $ racket -h
+            $ facet --help
         To get an overview of the possibilities.
     """
 

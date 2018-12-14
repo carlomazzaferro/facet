@@ -1,3 +1,7 @@
+"""
+Main module responsible for training the model and serializing. Will also generate reports
+"""
+
 import os
 
 import pandas
