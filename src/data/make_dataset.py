@@ -1,30 +1,33 @@
 # -*- coding: utf-8 -*-
-import click
-import logging
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+
+import pandas
+from imblearn.over_sampling import SMOTE
+from sklearn.preprocessing import OneHotEncoder
 
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+def create_datasets(input_file: str, train_output_file: str, test_output_file: str):
+    df = pandas.read_csv(input_file)
+    x_tr, y_tr = df.dropna(subset=['Status']).drop(['Status', 'Id'], 1), df.Status.dropna()
+    train_df = resample(x_tr, y_tr)
+    train_df.to_csv(train_output_file)
+    x_predict = df[df.Status.isna()].drop(['Status', 'Id'], 1)
+    x_predict.to_csv(test_output_file)
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
+def to_cats(df: pandas.DataFrame):
+    for col in df.columns:
+        if col.startswith('Type'):
+            df[col] = df[col].apply(lambda x: int(x * 10))
+    return df
 
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
 
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
+def resample(x, y):
+    x_, y_ = SMOTE().fit_resample(x, y)
+    x_df = pandas.DataFrame(x_, columns=x.columns)
+    x_df['labels'] = pandas.Series(y_)
+    return x_df
 
-    main()
+
+def ohe(x):
+    enc = OneHotEncoder(categories='auto')
+    return pandas.DataFrame(enc.fit_transform(x).todense())
